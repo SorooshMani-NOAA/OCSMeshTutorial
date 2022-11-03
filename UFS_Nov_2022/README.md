@@ -1,3 +1,4 @@
+# Install environment
 This assumes Linux enviroment is used (and `bash`):
 ```bash
 mkdir /tmp/setup_conda_env
@@ -6,6 +7,8 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod 700 Miniconda3-latest-Linux-x86_64.sh
 ./Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
 ```
+if you're using a supercomputer, replace $HOME above with your $WORK or $SCRATCH directory as appropriate. Your $HOME might not have enough space available. When running the Miniconda3 setup script, make sure you don't have any PYTHONPATH set. e.g. on supercomputers unload all the loaded Python modules with lmod.
+
 This will install `conda` which is needed for future steps. Next you need to make sure your `.bashrc` sources conda paths by 
 adding the following in that file:
 ```bash
@@ -47,3 +50,27 @@ pip install ocsmesh
 ```
 Now the environment is ready for following along in the tutorials! Please let me know if you run into any issues
 during these steps so that I can update the Gist accordingly
+
+# Download files needed for tutorial
+In you work directory (current directory from which you'll run the 
+Jupyter notebook) create a directory called `data` and download the
+required DEMs as well as other files used throughout this tutorial.
+Assuming you're going to run this notebook on a compute node that doesn't
+have access to the internet, you need to run this on the login node:
+```bash
+# To create cartopy cache
+cartopy_feature_download.py physical
+
+cd /path/to/your/work/dir
+mkdir data
+cd data
+
+wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip?dl=1
+unzip shinnecock_inlet_test_case.zip fort.14
+
+wget \
+    https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w074x25_2015v1.tif \
+    https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w074x00_2015v1.tif \
+    https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n40x75_w074x25_2015v1.tif \
+    https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n40x75_w074x00_2015v1.tif
+```
