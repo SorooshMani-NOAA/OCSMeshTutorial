@@ -66,6 +66,9 @@ cd /path/to/your/work/dir
 mkdir data
 cd data
 
+wget https://www.nohrsc.noaa.gov/pub/staff/keicher/NWM_live/web/data_tools/NWM_channel_hydrofabric.tar.gz
+tar -xf NWM_channel_hydrofabric.tar.gz
+
 wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip?dl=1
 unzip shinnecock_inlet_test_case.zip fort.14
 
