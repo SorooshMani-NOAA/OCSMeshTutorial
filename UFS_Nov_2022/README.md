@@ -32,8 +32,9 @@ conda activate simulation
 pip install pyschism # to install from PyPI repository
 pip install stormevents
 git clone https://github.com/noaa-ocs-modeling/ocsmesh
-python ocsmesh/setup.py build_jigsaw
-pip install ocsmesh
+cd ocsmesh
+python setup.py install_jigsaw
+pip install .
 ```
 Note that it is also possible to install `ocsmesh` from PyPI and `jigsaw` and `jigsaw-python` from `conda`, but as of now
 the latest `jigsaw-python` available on `conda-forge` doesn't have fixes for some of the bugs I've noticed. In case you still prefer
