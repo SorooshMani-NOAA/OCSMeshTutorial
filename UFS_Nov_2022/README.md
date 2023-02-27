@@ -29,7 +29,7 @@ If you want a more interactive environment add `ipython` and `jupyter-lab` to th
 
 Then we need to activate the newly created environemnt and start installing the rest of the packages using `pip`. 
 For some of the packages we are using `git` to download the source code. If you don't have `git`, you can add that
-to your environment as well. Note that you need to have `cmake` and `gcc` compilers for the next steps
+to your environment as well. Note that you need to have `cmake` and `gcc` compilers for the next steps. **`gcc`** should be version **7** or higher and **`cmake`** should be version **3.9.4** or higher. On HPC platforms you can usually get those by using `module load gnu` or `module load gcc` and `module load cmake`.
 ```bash
 conda activate simulation
 pip install pyschism # to install from PyPI repository
@@ -69,7 +69,7 @@ cd data
 wget https://www.nohrsc.noaa.gov/pub/staff/keicher/NWM_live/web/data_tools/NWM_channel_hydrofabric.tar.gz
 tar -xf NWM_channel_hydrofabric.tar.gz
 
-wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip?dl=1
+wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip
 unzip shinnecock_inlet_test_case.zip fort.14
 
 wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2022/geotiff/ -O gebco_2022.zip
