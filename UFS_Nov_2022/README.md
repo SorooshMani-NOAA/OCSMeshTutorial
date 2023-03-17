@@ -23,7 +23,7 @@ This will install `mamba` for your `base` environment.
 Now let's create a new environment with packages that are required by `pyschism`, `ocsmesh` and other relevant useful tools such 
 as `stormevents`:
 ```bash
-mamba create -n simulation -c conda-forge python=3.9 geos gdal proj "shapely<2" pygeos pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits 
+mamba create -n simulation -c conda-forge python=3.9 geos gdal proj "shapely<2" pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs
 ```
 If you want a more interactive environment add `ipython` and `jupyter-lab` to the above environment as well.
 
