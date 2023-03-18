@@ -87,4 +87,7 @@ wget \
     https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x25_2015v1.tif
 ```
 
+# Update notebook for all paths and dataset versions
 Please note that depending on when you get some of the files above, the data within might be of a different version than that of the tutorial notebook. For example for NWM, the notebook is using NWM v2.0, but at the time of this update to this readme, the current version downloadable is v2.1. Also for GEBCO dataset the version downloaded by the guide in this readme is 2022, while the one used in the tutorial is 2021.
+
+Because of this when running the tutorial, you need to make sure you use the right version, path, etc. for the datasets when running on your machine (or HPC)
