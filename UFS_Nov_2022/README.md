@@ -23,13 +23,13 @@ This will install `mamba` for your `base` environment.
 Now let's create a new environment with packages that are required by `pyschism`, `ocsmesh` and other relevant useful tools such 
 as `stormevents`:
 ```bash
-mamba create -n simulation -c conda-forge python=3.9 geos gdal proj shapely pygeos pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits 
+mamba create -n simulation -c conda-forge python=3.9 geos gdal proj "shapely<2" pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs
 ```
 If you want a more interactive environment add `ipython` and `jupyter-lab` to the above environment as well.
 
 Then we need to activate the newly created environemnt and start installing the rest of the packages using `pip`. 
 For some of the packages we are using `git` to download the source code. If you don't have `git`, you can add that
-to your environment as well. Note that you need to have `cmake` and `gcc` compilers for the next steps
+to your environment as well. Note that you need to have `cmake` and `gcc` compilers for the next steps. **`gcc`** should be version **7** or higher and **`cmake`** should be version **3.9.4** or higher. On HPC platforms you can usually get those by using `module load gnu` or `module load gcc` and `module load cmake`.
 ```bash
 conda activate simulation
 pip install pyschism # to install from PyPI repository
@@ -52,6 +52,15 @@ pip install ocsmesh
 Now the environment is ready for following along in the tutorials! Please let me know if you run into any issues
 during these steps so that I can update the Gist accordingly
 
+## A note on `pygeos`
+At the time of this writing, OCSMesh is not using `shapely >= 2.x` and may still rely on `pygeos` for faster operations. However on some platforms due to incompatibilities that may arise between `pygeos` and `shapely` the tutorial sections may fail. Because of this, it is recommended that you **remove** `pygeos` at the end of installing everything in your environment (in case it's installed by other packages' requirements). To do so either use `pip uninstall pygeos` or `conda remove pygeos` in your environment. Note that `pygeos` might not be installed if you follow this updated installation guide.
+
+## A note on `proj`
+If your `proj` library is installed using `conda`, it is possible that conda doesn't set the right network variable for your `proj` when you activate the conda environment. This will sometimes result in some projection operations to fail (after waiting for a very long time!). To avoid this please set `PROJ_NETWORK` to `OFF` in your environment prior to using Python for OCSMesh or prior to running the Jupyter notebook. If you're using bash, you can do so by:
+```bash
+export PROJ_NETWORK="OFF"
+```
+
 # Download files needed for tutorial
 In you work directory (current directory from which you'll run the 
 Jupyter notebook) create a directory called `data` and download the
@@ -69,7 +78,7 @@ cd data
 wget https://www.nohrsc.noaa.gov/pub/staff/keicher/NWM_live/web/data_tools/NWM_channel_hydrofabric.tar.gz
 tar -xf NWM_channel_hydrofabric.tar.gz
 
-wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip?dl=1
+wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip
 unzip shinnecock_inlet_test_case.zip fort.14
 
 wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2022/geotiff/ -O gebco_2022.zip
@@ -86,3 +95,8 @@ wget \
     https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x50_2015v1.tif \
     https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x25_2015v1.tif
 ```
+
+# Update notebook for all paths and dataset versions
+Please note that depending on when you get some of the files above, the data within might be of a different version than that of the tutorial notebook. For example for NWM, the notebook is using NWM v2.0, but at the time of this update to this readme, the current version downloadable is v2.1. Also for GEBCO dataset the version downloaded by the guide in this readme is 2022, while the one used in the tutorial is 2021.
+
+Because of this when running the tutorial, you need to make sure you use the right version, path, etc. for the datasets when running on your machine (or HPC)
