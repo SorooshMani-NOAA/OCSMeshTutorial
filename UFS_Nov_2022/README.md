@@ -23,7 +23,7 @@ This will install `mamba` for your `base` environment.
 Now let's create a new environment with packages that are required by `pyschism`, `ocsmesh` and other relevant useful tools such 
 as `stormevents`:
 ```bash
-mamba create -n simulation -c conda-forge jupyterlab ipython python=3.10 geos gdal proj shapely pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs 
+mamba create -n simulation -c conda-forge jupyterlab ipython python==3.10 geos gdal proj shapely pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs 
 ```
 If you want a more interactive environment add `ipython` and `jupyter-lab` to the above environment as well.
 Note that if you don't have `git` in your environment (e.g. Anaconda PowerShell), you can install it in the environment by adding `git` to the list above.
@@ -33,8 +33,7 @@ For some of the packages we are using `git` to download the source code. If you 
 to your environment as well. Note that you need to have `cmake` and `gcc` compilers for the next steps. **`gcc`** should be version **7** or higher and **`cmake`** should be version **3.9.4** or higher. On HPC platforms you can usually get those by using `module load gnu` or `module load gcc` and `module load cmake`.
 ```bash
 conda activate simulation
-pip install pyschism # to install from PyPI repository
-pip install stormevents
+pip install pyschism stormevents
 git clone https://github.com/noaa-ocs-modeling/ocsmesh
 cd ocsmesh
 python setup.py install_jigsaw
@@ -46,9 +45,7 @@ to installed the packaged versions you can do the following instead of the previ
 ```bash
 conda activate simulation
 mamba install -c conda-forge jigsaw jigsawpy
-pip install pyschism
-pip install stormevents
-pip install ocsmesh
+pip install pyschism stormevents ocsmesh
 ```
 Now the environment is ready for following along in the tutorials! Please let me know if you run into any issues
 during these steps so that I can update the Gist accordingly
