@@ -23,9 +23,10 @@ This will install `mamba` for your `base` environment.
 Now let's create a new environment with packages that are required by `pyschism`, `ocsmesh` and other relevant useful tools such 
 as `stormevents`:
 ```bash
-mamba create -n simulation -c conda-forge jupyterlab ipython python geos gdal proj shapely pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs
+mamba create -n simulation -c conda-forge jupyterlab ipython python=3.10 geos gdal proj shapely pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs 
 ```
 If you want a more interactive environment add `ipython` and `jupyter-lab` to the above environment as well.
+Note that if you don't have `git` in your environment (e.g. Anaconda PowerShell), you can install it in the environment by adding `git` to the list above.
 
 Then we need to activate the newly created environemnt and start installing the rest of the packages using `pip`. 
 For some of the packages we are using `git` to download the source code. If you don't have `git`, you can add that
@@ -74,7 +75,8 @@ cartopy_feature_download.py physical
 cd /path/to/your/work/dir
 mkdir data
 cd data
-
+```
+```bash
 wget https://www.nohrsc.noaa.gov/pub/staff/keicher/NWM_live/web/data_tools/NWM_channel_hydrofabric.tar.gz
 tar -xf NWM_channel_hydrofabric.tar.gz
 
@@ -94,6 +96,28 @@ wget \
     https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x75_2015v1.tif \
     https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x50_2015v1.tif \
     https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x25_2015v1.tif
+```
+**Note for Windows users**
+If you're using PowerShell (e.g. Anaconda Powershell console), for wget operations you would need to specify an `-OutFile`. So it becomes something like
+```powershell
+wget https://www.nohrsc.noaa.gov/pub/staff/keicher/NWM_live/web/data_tools/NWM_channel_hydrofabric.tar.gz -OutFile NWM_channel_hydrofabric.tar.gz
+tar -xf NWM_channel_hydrofabric.tar.gz
+
+wget https://www.dropbox.com/s/t2e26p11ep0ydx1/shinnecock_inlet_test_case.zip -OutFile shinnecock_inlet_test_case.zip
+unzip shinnecock_inlet_test_case.zip fort.14
+
+wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2022/geotiff/ -OutFile gebco_2022.zip
+unzip gebco_2022.zip gebco_2022_n90.0_s0.0_w-90.0_e0.0.tif
+
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w074x25_2015v1.tif -OutFile ncei19_n41x00_w074x25_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w074x00_2015v1.tif -OutFile ncei19_n41x00_w074x00_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n40x75_w074x25_2015v1.tif -OutFile ncei19_n40x75_w074x25_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n40x75_w074x00_2015v1.tif -OutFile ncei19_n40x75_w074x00_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n40x75_w073x00_2015v1.tif -OutFile ncei19_n40x75_w073x00_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w073x00_2015v1.tif -OutFile ncei19_n41x00_w073x00_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x75_2015v1.tif -OutFile ncei19_n41x00_w072x75_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x50_2015v1.tif -OutFile ncei19_n41x00_w072x50_2015v1.tif
+wget https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/northeast_sandy/ncei19_n41x00_w072x25_2015v1.tif -OutFile ncei19_n41x00_w072x25_2015v1.tif
 ```
 
 # Update notebook for all paths and dataset versions
