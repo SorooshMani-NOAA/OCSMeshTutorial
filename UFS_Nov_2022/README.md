@@ -23,7 +23,7 @@ This will install `mamba` for your `base` environment.
 Now let's create a new environment with packages that are required by `pyschism`, `ocsmesh` and other relevant useful tools such 
 as `stormevents`:
 ```bash
-mamba create -n simulation -c conda-forge jupyterlab ipython python==3.10 geos gdal proj shapely pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs 
+mamba create -n simulation -c conda-forge jupyterlab ipython python==3.10 geos gdal proj "shapely>=2" pyproj cartopy hdf5 netcdf4 udunits2 cfgrib cfunits appdirs 
 ```
 If you want a more interactive environment add `ipython` and `jupyter-lab` to the above environment as well.
 Note that if you don't have `git` in your environment (e.g. Anaconda PowerShell), you can install it in the environment by adding `git` to the list above.
@@ -49,9 +49,6 @@ pip install pyschism stormevents ocsmesh
 ```
 Now the environment is ready for following along in the tutorials! Please let me know if you run into any issues
 during these steps so that I can update the Gist accordingly
-
-## A note on `pygeos`
-At the time of this writing, OCSMesh is not using `shapely >= 2.x` and may still rely on `pygeos` for faster operations. However on some platforms due to incompatibilities that may arise between `pygeos` and `shapely` the tutorial sections may fail. Because of this, it is recommended that you **remove** `pygeos` at the end of installing everything in your environment (in case it's installed by other packages' requirements). To do so either use `pip uninstall pygeos` or `conda remove pygeos` in your environment. Note that `pygeos` might not be installed if you follow this updated installation guide.
 
 ## A note on `proj`
 If your `proj` library is installed using `conda`, it is possible that conda doesn't set the right network variable for your `proj` when you activate the conda environment. This will sometimes result in some projection operations to fail (after waiting for a very long time!). To avoid this please set `PROJ_NETWORK` to `OFF` in your environment prior to using Python for OCSMesh or prior to running the Jupyter notebook. If you're using bash, you can do so by:
